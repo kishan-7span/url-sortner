@@ -1,5 +1,6 @@
-import React from "react";
-import { DeleteIcon, EditIcon } from "../../public/icon";
+import React, { useState } from "react";
+import { CopyToClipBoard, DeleteIcon, EditIcon } from "../../public/icon";
+import { QRCodeCanvas } from "qrcode.react";
 
 const UrlListTable = ({
   arrayUrl,
@@ -11,6 +12,7 @@ const UrlListTable = ({
   shortUrlInput,
   handleDeleteUrl,
 }) => {
+  const [activeQRId, setActiveQRId] = useState(true);
   return (
     <div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -24,6 +26,9 @@ const UrlListTable = ({
             </th>
             <th scope="col" className="px-6 py-3 text-center">
               Delete Url
+            </th>
+            <th scope="col" className="px-6 py-3 text-center">
+              QR
             </th>
           </tr>
         </thead>
@@ -83,6 +88,22 @@ const UrlListTable = ({
                 >
                   <DeleteIcon />
                 </button>
+              </td>
+              <td className="px-6 py-4 text-center">
+                <button onClick={() => setActiveQRId(url.id)}>
+                  Generate QR
+                </button>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    filter: activeQRId === url.id ? "none" : "blur(4px)",
+                    transition: "0.3s",
+                    marginTop: "10px",
+                  }}
+                >
+                  <QRCodeCanvas value={url.shortUrl} size={80} />
+                </div>
               </td>
             </tr>
           ))}

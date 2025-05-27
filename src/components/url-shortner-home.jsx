@@ -20,6 +20,8 @@ const UrlShortenerHome = () => {
   const [arrayUrl, setArrayUrl] = useState([]);
   const [customeEndPoint, setCustomeEndPoint] = useState("");
   const [generateAuto, setGenerateAuto] = useState(true);
+
+
   //will generate 7 character unique id from a-z, A-Z, 0-9
   const getId = async () => {
     const charset =
@@ -53,6 +55,7 @@ const UrlShortenerHome = () => {
       setArrayUrl(urls);
     }
   };
+  
   //handle submition of longURl to firebase and create a short Url
   const handleSubmit = async () => {
     if (!longUrl) return alert("Please enter a long URL");
@@ -87,6 +90,7 @@ const UrlShortenerHome = () => {
     setCustomeEndPoint("");
     setGenerateAuto(true); // Reset to auto-generate after submission
   };
+
   //edit Url
   const handleEditUrl = (id, shortUrl) => {
     const sliced = shortUrl.split("/").pop(); // gets text after last /
@@ -134,7 +138,7 @@ const UrlShortenerHome = () => {
         Custom End Point:
       </label>
 
-      <div className="flex  gap-2">
+      <div className="flex  items-center gap-2">
         <input
           className={`px-3 py-3 border border-black outline-0 rounded-xl w-full ${
             generateAuto ? "bg-gray-200" : "bg-white"
@@ -145,9 +149,12 @@ const UrlShortenerHome = () => {
           placeholder="Place Cutome End Point"
           disabled={generateAuto}
         />
+        <label className="text-sm  font-semibold">
+          {generateAuto ? "Disabled" : "Enabled"}
+        </label>
         <input
           type="checkbox"
-          className="p-3 w-3"
+          className="p-3 w-4"
           checked={generateAuto}
           onChange={() => setGenerateAuto(!generateAuto)}
         />
