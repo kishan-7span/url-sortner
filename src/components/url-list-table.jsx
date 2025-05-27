@@ -1,5 +1,5 @@
 import React from "react";
-import { EditIcon } from "../../public/icon";
+import { DeleteIcon, EditIcon } from "../../public/icon";
 
 const UrlListTable = ({
   arrayUrl,
@@ -8,7 +8,8 @@ const UrlListTable = ({
   setEditRowId,
   handleUpdateUrl,
   handleEditUrl,
-  shortUrlInput
+  shortUrlInput,
+  handleDeleteUrl,
 }) => {
   return (
     <div>
@@ -20,6 +21,9 @@ const UrlListTable = ({
             </th>
             <th scope="col" className="px-6 py-3 text-center">
               Edit Url
+            </th>
+            <th scope="col" className="px-6 py-3 text-center">
+              Delete Url
             </th>
           </tr>
         </thead>
@@ -40,7 +44,6 @@ const UrlListTable = ({
                     <input
                       value={shortUrlInput}
                       onChange={(e) => setShortUrlInput(e.target.value)}
-                      
                       className="w-min border-b outline-0 px-2 py-1 rounded-r"
                     />
                   </div>
@@ -71,6 +74,15 @@ const UrlListTable = ({
                     <EditIcon />
                   </button>
                 )}
+              </td>
+              <td className="px-6 py-4 text-center">
+                <button
+                  onClick={() => handleDeleteUrl(url.id)}
+                  className="bg-red-300 rounded-xl p-2 ml-2"
+                  disabled={editRowId === url.id}
+                >
+                  <DeleteIcon />
+                </button>
               </td>
             </tr>
           ))}

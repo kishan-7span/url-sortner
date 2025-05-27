@@ -113,6 +113,13 @@ const UrlShortenerHome = () => {
     fetchUrls(); // Refresh the list after update
   };
 
+  //handle delete Url
+  const handleDeleteUrl = async (id) => {
+    const ref = doc(db, "shortner", id);
+    await deleteDoc(ref);
+    setArrayUrl((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
     <div className="w-full flex flex-col justify-center gap-2">
       <h1 className="font-bold text-lg text-center py-2">URl shortner</h1>
@@ -162,6 +169,7 @@ const UrlShortenerHome = () => {
             handleEditUrl={handleEditUrl}
             handleUpdateUrl={handleUpdateUrl}
             shortUrlInput={shortUrlInput}
+            handleDeleteUrl={handleDeleteUrl}
           />
         </div>
       )}
