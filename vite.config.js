@@ -8,4 +8,5 @@ export default defineConfig({
     host: "short.test",
     port: 5173,
   },
+  base: "./",
 });

@@ -56,12 +56,11 @@ const UrlShortenerHome = () => {
   //handle submition of longURl to firebase and create a short Url
   const handleSubmit = async () => {
     if (!longUrl) return alert("Please enter a long URL");
-    if (!customeEndPoint || customeEndPoint.trim() === "") {
-      return alert("Please enter a custom endpoint or enable auto-generate");
+
+    const id = !generateAuto ? customeEndPoint : await getId();
+    if (!generateAuto && id.trim() === "") {
+      return alert("Please enter a custom endpoint");
     }
-
-    const id = !generateAuto ? customeEndPoint : getId();
-
     //windows location.origin will give the current URL of the page
     const shortUrl = window.location.origin + "/" + id;
 
